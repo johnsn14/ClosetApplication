@@ -9,7 +9,7 @@ Android Studio Project using Java and Kotlin
 5. If you don't see this branch in Android Studio, you can find where to change branches in Android Studio.
 6. Once you have added changes to your code, submit a commit to the **test-branch** then push them locally.
 7. Once you have pushed them locally make sure you push them to your Forked project on your Personal Github. 
-8. Now go back to the Main project [ClosetApp Homepage](https://github.com/kgerk-dev/ClosetApplication/new/master?readme=1)
+8. Now go back to the Main project [ClosetApp Homepage](https://github.com/kgerk-dev/ClosetApplication)
 9. When you go to CODE in the top left tab menu, you will see a banner in the top-middle of the page that says "This branch is 1 Commit behind <The Main Project>.
 10. Click Contribute > Open Pull Request > Choose the branch on the main project **Test-dev** and the same branch on your project.
 11. Make sure your changes are correct, you'll be able to check them on the *Comparing Changes Page*
