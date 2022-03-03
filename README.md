@@ -14,3 +14,13 @@ Android Studio Project using Java and Kotlin
 10. Click Contribute > Open Pull Request > Choose the branch on the main project **Test-dev** and the same branch on your project.
 11. Make sure your changes are correct, you'll be able to check them on the *Comparing Changes Page*
 12. Select Create Pull Request, Title it, and add as much detail as you need to explain your changes in the comment section.
+
+  
+## Hardware Profile for Samsung S20 Emulator
+Because Win 11 does not allow Malik to use Android Studio Emulator. We will use a Customized version of the Samsung S20.
+** Specs for Emulating a Samsung S20 **
+  - API Level 32
+  - Resolution = 1440 x 3200
+  - Ram = 1536 mb -- Android Studio for some reason defaults to this number.
+  - Make sure Input - "Has Hardware buttons" and "Has Hardware Keyboard" are *unselected*
+  - Everything should be selected - Finish and create Hardware Profile.
