@@ -1,3 +1,68 @@
 <resources>
+    <!--All declared here to avoid the literal string issue-->
     <string name="app_name">Closet</string>
+    <string name="type_spinner">Clothing Type</string>
+    <string name="color_spinner">Color</string>
+    <string name="brand_spinner">Brand</string>
+    <string name="theme_spinner">Theme</string>
+    <string name="clothing_upload">Clothing Upload</string>
+    <string name="price">Price</string>
+    <string name="size">Size</string>
+    <string name="closet_display">Closet Display</string>
+    <string name="back">Back</string>
+
+    <!--All of the items for our Spinners/dropdown menus-->
+    <string-array name="clothing_type_array">
+        <item>Clothing Type</item>
+        <item>Shirts</item>
+        <item>Pants</item>
+        <item>Shoes</item>
+        <item>Accessories</item>
+        <item>Jupiter</item>
+        <item>Dresses</item>
+        <item>Outerwear</item>
+        <item>Undergarments</item>
+    </string-array>
+
+    <string-array name="clothing_color_array">
+        <item>Color</item>
+        <item>Yellow</item>
+        <item>Yellow-Green</item>
+        <item>Green</item>
+        <item>Blue-Green</item>
+        <item>Blue</item>
+        <item>Blue-Violet</item>
+        <item>Violet</item>
+        <item>Red-Violet</item>
+        <item>Red</item>
+        <item>Red-Orange</item>
+        <item>Orange</item>
+        <item>Orange-Yellow</item>
+    </string-array>
+
+    <string-array name="clothing_brand_array">
+        <item>Brand</item>
+        <item>NIKE</item>
+        <item>GUCCI</item>
+        <item>Louis Vuitton</item>
+        <item>Adidas</item>
+        <item>Chanel</item>
+        <item>ZARA</item>
+        <item>UNIQLO</item>
+        <item>H&amp;M</item>
+        <item>Cartier</item>
+        <item>Hermès</item>
+    </string-array>
+
+    <string-array name="clothing_theme_array">
+        <item>Theme</item>
+        <item>Casual</item>
+        <item>Business</item>
+        <item>Formal</item>
+        <item>Adidas</item>
+        <item>Athletic</item>
+        <item>Lounge Wear</item>
+        <item>School</item>
+        <item>Swimwear</item>
+    </string-array>
 </resources>

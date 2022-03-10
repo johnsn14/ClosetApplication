@@ -1,5 +1,8 @@
 package com.example.closet
 
+
+import android.content.Intent
+
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -7,10 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
-class MainActivity : AppCompatActivity() {
+class LoginPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.login_page)
 
         println("Sade")
 
@@ -21,8 +24,12 @@ class MainActivity : AppCompatActivity() {
 
         loginbtn.setOnClickListener {
             if (username.text.toString() == "test" && password.text.toString() == "Password") {
-                Toast.makeText(this@MainActivity, "Login Successful", Toast.LENGTH_SHORT).show()
-            } else Toast.makeText(this@MainActivity, "Try Again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginPage, "Login Successful", Toast.LENGTH_SHORT).show()
+
+                val intent = Intent (this, ClosetDisplayPage:: class.java )
+                startActivity(intent)
+
+            } else Toast.makeText(this@LoginPage, "Try Again", Toast.LENGTH_SHORT).show()
         }
 
 
