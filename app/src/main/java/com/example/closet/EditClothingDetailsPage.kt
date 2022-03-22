@@ -27,8 +27,8 @@ class EditClothingDetailsPage : AppCompatActivity() {
 
         val clothingTypeSpinner: Spinner = findViewById(R.id.clothing_type_spinner)
         val clothingColorSpinner: Spinner = findViewById(R.id.clothing_color_spinner)
-        val clothingBrandSpinner: Spinner = findViewById(R.id.clothing_brand_spinner)
-        val clothingThemeSpinner: Spinner = findViewById(R.id.clothing_theme_spinner)
+        //val clothingBrandSpinner: Spinner = findViewById(R.id.clothing_brand_spinner)
+        //val clothingThemeSpinner: Spinner = findViewById(R.id.clothing_theme_spinner)
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         //These functions effectively allow us to populate the spinners with items
@@ -54,6 +54,7 @@ class EditClothingDetailsPage : AppCompatActivity() {
             // Apply the adapter to the spinner
             clothingColorSpinner.adapter = adapter
         }
+        /*
 
         ArrayAdapter.createFromResource(
             this,
@@ -66,6 +67,8 @@ class EditClothingDetailsPage : AppCompatActivity() {
             clothingBrandSpinner.adapter = adapter
         }
 
+         */
+        /*
         ArrayAdapter.createFromResource(
             this,
             R.array.clothing_theme_array,
@@ -76,6 +79,7 @@ class EditClothingDetailsPage : AppCompatActivity() {
             // Apply the adapter to the spinner
             clothingThemeSpinner.adapter = adapter
         }
+        */
 
         //spinner.onItemSelectedListener = this
     }
