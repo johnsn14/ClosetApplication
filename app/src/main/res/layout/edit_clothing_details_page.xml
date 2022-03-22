@@ -5,11 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditClothingDetailsPage">
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp">
 
     <!-- This is the title of the page. Using the same blue as the other titles.-->
@@ -71,7 +69,8 @@
         android:inputType="numberDecimal"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clothing_brand_spinner" />
+        app:layout_constraintTop_toBottomOf="@id/clothing_brand_spinner"
+        android:autofillHints="Price" />
 
     <!--Clothing Size Text Field-->
     <EditText
@@ -83,7 +82,8 @@
         android:inputType="text"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price_of_clothing" />
+        app:layout_constraintTop_toBottomOf="@id/price_of_clothing"
+        android:autofillHints="Size" />
 
     <!--Clothing Theme Dropdown Menu-->
     <Spinner
@@ -100,7 +100,7 @@
         android:id="@+id/backButton"
         android:layout_width="100dp"
         android:layout_height="45dp"
-        android:text="Back"
+        android:text="@string/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
