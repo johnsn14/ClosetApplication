@@ -48,7 +48,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clothing_type_spinner" />
 
-    <!--Clothing Brand Dropdown Menu-->
+    <EditText
+        android:id="@+id/clothing_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:hint="Description: Size, Pattern, etc etc"
+        android:inputType= "textLongMessage"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clothing_color_spinner"
+        android:autofillHints="Description" />
+
+    <!--Clothing Brand Dropdown Menu
     <Spinner
         android:id="@+id/clothing_brand_spinner"
         android:layout_width="160dp"
@@ -58,8 +70,8 @@
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clothing_color_spinner" />
-
-    <!--Clothing Price Text Field-->
+    -->
+    <!--Clothing Price Text Field
     <EditText
         android:id="@+id/price_of_clothing"
         android:layout_width="160dp"
@@ -69,10 +81,11 @@
         android:inputType="numberDecimal"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clothing_brand_spinner"
+        app:layout_constraintTop_toBottomOf="@id/clothing_color_spinner"
         android:autofillHints="Price" />
+        -->
 
-    <!--Clothing Size Text Field-->
+    <!--Clothing Size Text Field
     <EditText
         android:id="@+id/size_of_clothing"
         android:layout_width="160dp"
@@ -84,8 +97,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/price_of_clothing"
         android:autofillHints="Size" />
+    -->
 
-    <!--Clothing Theme Dropdown Menu-->
+    <!--Clothing Theme Dropdown Menu
     <Spinner
         android:id="@+id/clothing_theme_spinner"
         android:layout_width="160dp"
@@ -95,11 +109,12 @@
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/size_of_clothing" />
+        -->
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="100dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:text="@string/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
