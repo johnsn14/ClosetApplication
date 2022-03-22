@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!--All declared here to avoid the literal string issue-->
     <string name="app_name">Closet</string>
     <string name="type_spinner">Clothing Type</string>
