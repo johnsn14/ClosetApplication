@@ -8,9 +8,11 @@ import androidx.room.TypeConverters
  * @Database is used to declare the class used to interact with the database.
  * @TypeConverters are needed to interact with Android's/Kotlin's specific datatypes that aren't recognized 
  * in SQLite.
+ *
+ * In the future, when the app is fully functioning with its Database the export schema will be released into the
  */
 
-@Database (entities = [User::class], version = 1)
+@Database (entities = [ClothingItem::class], version = 1, exportSchema = false)
 @TypeConverters(ClosetTypeConverter::class)
 abstract class ClosetDatabase : RoomDatabase()
 {
