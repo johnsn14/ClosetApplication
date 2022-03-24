@@ -32,7 +32,5 @@ class LoginPage : AppCompatActivity() {
             } else Toast.makeText(this@LoginPage, "Try Again", Toast.LENGTH_SHORT).show()
         }
 
-
-
     }
 }
