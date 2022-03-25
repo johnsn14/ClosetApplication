@@ -27,6 +27,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="16dp" />
 
+    <TextView
+        android:id="@+id/clothingTypeTitle"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Clothing Type"
+        android:textColor="#1DA1F2"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clothingUploadTitle"
+        tools:layout_editor_absoluteX="16dp" />
+
     <Spinner
         android:id="@+id/clothing_type_spinner"
         android:layout_width="160dp"
@@ -37,6 +50,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clothingUploadTitle" />
 
+    <TextView
+        android:id="@+id/clothingColorTitle"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Clothing Color"
+        android:textColor="#1DA1F2"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clothing_type_spinner"
+        tools:layout_editor_absoluteX="16dp" />
     <!--Clothing Color Dropdown Menu-->
     <Spinner
         android:id="@+id/clothing_color_spinner"
