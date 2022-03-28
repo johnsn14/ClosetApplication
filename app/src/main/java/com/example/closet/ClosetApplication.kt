@@ -1,7 +1,7 @@
 package com.example.closet
 
 import android.app.Application
-import com.example.closet.database.ClosetRepository
+import com.example.closet.ClosetRepository
 
 /**
  * This instance of our Application willl the beginning of our application's LifeCycle control
