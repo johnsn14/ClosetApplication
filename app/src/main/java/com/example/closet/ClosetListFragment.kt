@@ -46,7 +46,7 @@ class ClosetListFragment: Fragment() {
     }
 
     /**
-     * Override onAttch() to set the callbacks property.
+     * Override onAttach() to set the callbacks property.
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -112,7 +112,6 @@ class ClosetListFragment: Fragment() {
         fab2.setOnClickListener {
            Toast.makeText(activity, " capture Button clicked", Toast.LENGTH_SHORT).show()
         }
-
         return view
     }
 
@@ -131,7 +130,6 @@ class ClosetListFragment: Fragment() {
     /**
      * Override onDetach to unset the callbacks property.
      */
-
     override fun onDetach() {
         super.onDetach()
         callbacks = null
