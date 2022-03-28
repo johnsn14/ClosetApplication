@@ -1,11 +1,20 @@
 package com.example.closet
 
 import android.os.Bundle
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 
 class MainClosetDisplayPage : AppCompatActivity(),
+
     ClosetListFragment.Callbacks {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -19,7 +28,7 @@ class MainClosetDisplayPage : AppCompatActivity(),
                 val fragment = ClosetListFragment.newInstance()
                 supportFragmentManager
                     .beginTransaction()
-                    .add(R.id.fragment_container,fragment)
+                    .add(R.id.fragment_container, fragment)
                     .commit()
             }
 

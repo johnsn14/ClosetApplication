@@ -1,16 +1,24 @@
 package com.example.closet
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
 class ClosetListFragment: Fragment() {
@@ -51,10 +59,60 @@ class ClosetListFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //Should we inflate EditCLothingList or Closet Recycler view?
-        val view = inflater.inflate(R.layout.closet_list_recycler_view,container,false)
+        val view = inflater.inflate(R.layout.closet_list_recycler_view, container, false)
         closetRecyclerView = view.findViewById(R.id.closet_list_recycler_view_id) as RecyclerView
         closetRecyclerView.adapter = adapter
-        closetRecyclerView.layoutManager = LinearLayoutManager(context)
+        closetRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+
+
+        var ButtonClicked = false
+
+        val fab = view.findViewById<FloatingActionButton>(R.id.add_fab)
+        val fab1 = view.findViewById<FloatingActionButton>(R.id.upload_action_button)
+        val fab2 = view.findViewById<FloatingActionButton>(R.id.capture_action_button)
+        val rotateOpenAnimation: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_open_animation)}
+        val rotateCloseAnimation: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_close_animation)}
+
+        //commented code for the gallery action to work for button clicked
+        //to upload a photo it works but for now
+         val previewImage by lazy { view.findViewById<ImageView>(R.id.image) }
+         val selectImageFromGalleryResult = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let { previewImage.setImageURI(uri) }
+        }
+
+        fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
+
+        fun setClickListeners() {
+           view.findViewById<FloatingActionButton>(R.id.upload_action_button).setOnClickListener {
+                selectImageFromGallery()
+            }
+        }
+
+        fab.setOnClickListener {
+
+            if (!ButtonClicked) {
+                fab.startAnimation(rotateOpenAnimation)
+                fab1.visibility = View.VISIBLE
+                fab2.visibility = View.VISIBLE
+                Toast.makeText(activity, "Button clicked", Toast.LENGTH_SHORT).show()
+                ButtonClicked = true
+            } else {
+                fab.startAnimation(rotateCloseAnimation)
+                fab1.visibility = View.INVISIBLE
+                fab2.visibility = View.INVISIBLE
+                ButtonClicked = false
+            }
+        }
+        fab1.setOnClickListener{
+           //for upload button clicked it brimgs us too the galley option
+             setClickListeners()
+           Toast.makeText(activity, " upload Button clicked", Toast.LENGTH_SHORT).show()
+        }
+        fab2.setOnClickListener {
+           Toast.makeText(activity, " capture Button clicked", Toast.LENGTH_SHORT).show()
+        }
+
         return view
     }
 
@@ -113,7 +171,7 @@ class ClosetListFragment: Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : ClothingItemHolder {
-            val view = layoutInflater.inflate(R.layout.closet_list_item, parent, false)
+            val view = layoutInflater.inflate(R.layout.photo_gridlayout, parent, false)
             return ClothingItemHolder(view)
         }
 
