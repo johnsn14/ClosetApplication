@@ -2,7 +2,10 @@ package com.example.closet.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
+import com.example.closet.ClothingItem
 import java.util.*
 
 /**
@@ -15,15 +18,16 @@ import java.util.*
  */
 @Dao
 interface ClosetDAO {
-    //Example of how this would work.
-    /*
-    @Query ("SELECT * FROM user")
-    fun getUser(): List<user>
-    */
     // This will pull all columns for all rows in the Closet Database table.
     @Query("SELECT * FROM ClothingItem")
     fun getClothingItems(): LiveData<List<ClothingItem>>
     //This pulls all Columns for ONLY ONE row whose id matches the ID value provided.
-    @Query("SELECT * FROM ClothingItem WHERE Clothing_item_id=(:id)")
+    @Query("SELECT * FROM ClothingItem WHERE id=(:id)")
     fun getClothingItem(id: UUID): LiveData<ClothingItem?>
+
+    @Update
+    fun updateClothingItem(clothingItem: ClothingItem)
+
+    @Insert
+    fun addClothingItem(clothingItem: ClothingItem)
 }

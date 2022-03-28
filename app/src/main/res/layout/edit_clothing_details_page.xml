@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EditClothingDetailsPage">
+    android:layout_height="match_parent">
+
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/edit_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
@@ -14,88 +15,153 @@
 
     <!--Clothing Type Dropdown Menu-->
 
-    <TextView
-        android:id="@+id/clothingUploadTitle"
+    <EditText
+        android:id="@+id/edit_clothing_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/enter_clothing_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingColorTitle" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="113dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingUploadTitle">
+
+        <ImageView
+            android:id="@+id/clothing_item_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            android:cropToPadding="true"
+            android:scaleType="centerInside" />
+    </LinearLayout>
+
+    <TextView
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/clothingTypeTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!--Clothing Color Dropdown Menu-->
+
+    <TextView
+        android:id="@+id/clothingUploadTitle"
+        android:layout_width="366dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
         android:text="@string/clothing_upload"
         android:textColor="#1DA1F2"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/clothingTypeTitle"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Clothing Type"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/clothing_type"
         android:textColor="#1DA1F2"
         android:textSize="15sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clothingUploadTitle"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <Spinner
-        android:id="@+id/clothing_type_spinner"
-        android:layout_width="160dp"
+    <EditText
+        android:id="@+id/edit_clothing_type"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:contentDescription="@string/type_spinner"
-        android:minHeight="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="Enter Clothing Type"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clothingUploadTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/clothingTypeTitle" />
+
+
 
     <TextView
         android:id="@+id/clothingColorTitle"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Clothing Color"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/clothing_color"
         android:textColor="#1DA1F2"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clothing_type_spinner"
-        tools:layout_editor_absoluteX="16dp" />
-    <!--Clothing Color Dropdown Menu-->
-    <Spinner
-        android:id="@+id/clothing_color_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/edit_clothing_type" />
+
+    <TextView
+        android:id="@+id/clothing_description_title"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:contentDescription="@string/color_spinner"
-        android:minHeight="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/description"
+        android:textColor="#1DA1F2"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clothing_type_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_clothing_color"
+        tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/clothing_description"
+        android:id="@+id/edit_clothing_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:hint="Description: Size, Pattern, etc etc"
-        android:inputType= "textLongMessage"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:autofillHints="Description"
+        android:hint="@string/description_size_pattern_etc"
+        android:inputType="textLongMessage"
         android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clothing_color_spinner"
-        android:autofillHints="Description" />
+        app:layout_constraintTop_toBottomOf="@+id/clothing_description_title" />
 
     <!--Clothing Brand Dropdown Menu
-    <Spinner
-        android:id="@+id/clothing_brand_spinner"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:contentDescription="@string/brand_spinner"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clothing_color_spinner" />
-    -->
+   <Spinner
+       android:id="@+id/clothing_brand_spinner"
+       android:layout_width="160dp"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="50dp"
+       android:contentDescription="@string/brand_spinner"
+       android:minHeight="48dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@id/clothing_color_spinner" />
+   -->
     <!--Clothing Price Text Field
     <EditText
         android:id="@+id/price_of_clothing"
@@ -135,14 +201,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/size_of_clothing" />
         -->
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:text="@string/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,4 +1,4 @@
-package com.example.closet.database
+package com.example.closet
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,6 +14,15 @@ import java.util.*
  * 6.
  */
 
+//Sprint 2 Class. Only one to be used at the moment.
+@Entity
+data class ClothingItem(@PrimaryKey val id: UUID = UUID.randomUUID(),
+                        var clothingType: String = "",
+                        var color: String = "",
+                        var description: String = "")
+{}
+
+
 @Entity
 data class User (@PrimaryKey val User_id: UUID = UUID.randomUUID(),
                  val FirstName: String = "",
@@ -21,13 +30,6 @@ data class User (@PrimaryKey val User_id: UUID = UUID.randomUUID(),
                  val Password: String = "",
                  val Email: String = "")
 {}
-@Entity
-data class ClothingItem (@PrimaryKey val Clothing_item_id: UUID = UUID.randomUUID(),
-                         val ClothingType: String = "",
-                         val Color: String = "",
-                         val Description: String = "")
-{}
-
 // Should this be a child of ClothingItem? or separate? Style is dependent on ClothingItem
 @Entity
 data class Style (@PrimaryKey val Style_Id: UUID = UUID.randomUUID(),

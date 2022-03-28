@@ -26,7 +26,7 @@ class LoginPage : AppCompatActivity() {
             if (username.text.toString() == "test" && password.text.toString() == "Password") {
                 Toast.makeText(this@LoginPage, "Login Successful", Toast.LENGTH_SHORT).show()
 
-                val intent = Intent (this, ClosetDisplayPage:: class.java )
+                val intent = Intent (this, MainClosetDisplayPage:: class.java )
                 startActivity(intent)
 
             } else Toast.makeText(this@LoginPage, "Try Again", Toast.LENGTH_SHORT).show()

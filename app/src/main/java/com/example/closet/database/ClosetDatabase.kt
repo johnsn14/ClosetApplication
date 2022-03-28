@@ -3,6 +3,7 @@ package com.example.closet.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.closet.ClothingItem
 
 /**
  * @Database is used to declare the class used to interact with the database.
@@ -12,7 +13,7 @@ import androidx.room.TypeConverters
  * In the future, when the app is fully functioning with its Database the export schema will be released into the
  */
 
-@Database (entities = [ClothingItem::class], version = 1, exportSchema = false)
+@Database (entities = [ClothingItem::class], version = 1)
 @TypeConverters(ClosetTypeConverter::class)
 abstract class ClosetDatabase : RoomDatabase()
 {

@@ -1,9 +1,12 @@
-package com.example.closet.database
+package com.example.closet
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
+import com.example.closet.database.ClosetDatabase
+import com.example.closet.ClothingItem
 import java.util.*
+import java.util.concurrent.Executors
 
 /**
  * This class encapsulates the logic for accessing data from a single sourcec or a set of sources.
@@ -33,12 +36,23 @@ class ClosetRepository private constructor(context: Context) {
     ).build()
 
     private val closetDAO = database.closetDao()
+    private val executor = Executors.newSingleThreadExecutor()
 
-    //For now this will be voided out until we create a datastructure to store the clothes from our closet.
-    //fun getCloset(): List<Closet> = closetDAO.getClothingItems()
-    //fun getCloset(): List<Closet> = closetDao.getClothingItem(id)
     fun getClothingItems(): LiveData<List<ClothingItem>> = closetDAO.getClothingItems()
     fun getClothingItem(id: UUID): LiveData<ClothingItem?> = closetDAO.getClothingItem(id)
+
+    fun updateClothingItem(clothingItem: ClothingItem) {
+        executor.execute {
+            closetDAO.updateClothingItem(clothingItem)
+        }
+    }
+
+    //Add Clothing Item
+    fun addClothingItem(clothingItem: ClothingItem) {
+        executor.execute {
+            closetDAO.addClothingItem(clothingItem)
+        }
+    }
 
     companion object {
         private var INSTANCE: ClosetRepository? = null
