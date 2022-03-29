@@ -13,4 +13,8 @@ class ClosetViewModel: ViewModel() {
     private val closetRepository = ClosetRepository.get()
     val clothingItemListLiveData = closetRepository.getClothingItems()
 
+    fun addClothingItem(clothingItem: ClothingItem) {
+        closetRepository.addClothingItem(clothingItem)
+    }
+
 }

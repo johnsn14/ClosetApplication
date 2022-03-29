@@ -39,6 +39,7 @@ class ClosetRepository private constructor(context: Context) {
     private val executor = Executors.newSingleThreadExecutor()
 
     fun getClothingItems(): LiveData<List<ClothingItem>> = closetDAO.getClothingItems()
+
     fun getClothingItem(id: UUID): LiveData<ClothingItem?> = closetDAO.getClothingItem(id)
 
     fun updateClothingItem(clothingItem: ClothingItem) {

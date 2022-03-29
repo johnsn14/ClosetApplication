@@ -13,7 +13,7 @@ class ClothingItemDetailViewModel() : ViewModel() {
 
     var clothingItemLiveData: LiveData<ClothingItem?> =
         Transformations.switchMap(clothingItemIdLiveData) {
-                clothingItemId -> clothingItemRepository.getClothingItem(clothingItemId)
+                id -> clothingItemRepository.getClothingItem(id)
         }
 
     fun loadClothingItem(clothingItemId: UUID) {
