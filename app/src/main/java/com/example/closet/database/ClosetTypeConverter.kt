@@ -22,4 +22,5 @@ class ClosetTypeConverter {
     fun fromUUID(uuid: UUID?): String? {
         return uuid?.toString()
     }
+
 }

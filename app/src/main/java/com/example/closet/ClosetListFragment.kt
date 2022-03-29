@@ -3,7 +3,9 @@ package com.example.closet
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -44,16 +46,11 @@ class ClosetListFragment: Fragment() {
     }
 
     /**
-     * Override onAttach() to set the callbacks property.
+     * Override onAttch() to set the callbacks property.
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -65,42 +62,32 @@ class ClosetListFragment: Fragment() {
         val view = inflater.inflate(R.layout.closet_list_recycler_view, container, false)
         closetRecyclerView = view.findViewById(R.id.closet_list_recycler_view_id) as RecyclerView
         closetRecyclerView.adapter = adapter
-        closetRecyclerView.layoutManager = LinearLayoutManager(context)
+        closetRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        return view
-        /*var ButtonClicked = false
 
-        val fab = view.findViewById<FloatingActionButton>(R.id.add_fab)
-        val fab1 = view.findViewById<FloatingActionButton>(R.id.upload_action_button)
-        val fab2 = view.findViewById<FloatingActionButton>(R.id.capture_action_button)
-        val rotateOpenAnimation: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_open_animation)}
-        val rotateCloseAnimation: Animation by lazy { AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_close_animation)}
+        val fab: FloatingActionButton = view.findViewById(R.id.add_fab)
+        val fab1: FloatingActionButton = view.findViewById(R.id.upload_action_button)
+        val fab2: FloatingActionButton = view.findViewById(R.id.capture_action_button)
+        val rotateOpenAnimation: Animation by lazy { AnimationUtils.loadAnimation(activity, R.anim.rotate_open_animation)}
+        val rotateCloseAnimation: Animation by lazy { AnimationUtils.loadAnimation(activity, R.anim.rotate_close_animation)}
+        var ButtonClicked = false
 
-        //commented code for the gallery action to work for button clicked
-        //to upload a photo it works but for now
-         val previewImage by lazy { view.findViewById<ImageView>(R.id.image) }
-         val selectImageFromGalleryResult = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let { previewImage.setImageURI(uri) }
-        }
+        val previewImage by lazy { view.findViewById<ImageView>(R.id.grid_image_view) }
+        val selectImageFromGalleryResult =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+               uri?.let { previewImage.setImageURI(uri) }
+           }
 
         fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
 
-        /*fun setClickListeners() {
-           view.findViewById<FloatingActionButton>(R.id.upload_action_button).setOnClickListener {
-
-            }
-        }
-        */
-
         fab.setOnClickListener {
-
-            if (!ButtonClicked) {
+            if (!ButtonClicked){
                 fab.startAnimation(rotateOpenAnimation)
                 fab1.visibility = View.VISIBLE
                 fab2.visibility = View.VISIBLE
                 Toast.makeText(activity, "Button clicked", Toast.LENGTH_SHORT).show()
                 ButtonClicked = true
-            } else {
+            }else{
                 fab.startAnimation(rotateCloseAnimation)
                 fab1.visibility = View.INVISIBLE
                 fab2.visibility = View.INVISIBLE
@@ -108,17 +95,13 @@ class ClosetListFragment: Fragment() {
             }
         }
         fab1.setOnClickListener{
-           //for upload button clicked it brimgs us too the galley option
             selectImageFromGallery()
-           Toast.makeText(activity, " upload Button clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, " upload Button clicked", Toast.LENGTH_SHORT).show()
         }
         fab2.setOnClickListener {
-           Toast.makeText(activity, " capture Button clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, " capture Button clicked", Toast.LENGTH_SHORT).show()
         }
-        */
-         */
-
-
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -136,31 +119,10 @@ class ClosetListFragment: Fragment() {
     /**
      * Override onDetach to unset the callbacks property.
      */
+
     override fun onDetach() {
         super.onDetach()
         callbacks = null
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.fragment_new_closet_item_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.new_clothing_item -> {
-                val clothingItem = ClothingItem()
-                closetListViewModel.addClothingItem(clothingItem)
-                callbacks?.onClothingItemSelected(clothingItem.id)
-                true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun updateUI(clothingItems: List<ClothingItem>) {
-        adapter = ClothingItemAdapter(clothingItems)
-        closetRecyclerView.adapter = adapter
     }
 
     private inner class ClothingItemHolder(view: View) :
@@ -194,9 +156,10 @@ class ClosetListFragment: Fragment() {
      */
     private inner class ClothingItemAdapter(var clothingItems: List<ClothingItem>)
         : RecyclerView.Adapter<ClothingItemHolder>() {
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : ClothingItemHolder {
-            val view = layoutInflater.inflate(R.layout.closet_list_item, parent, false)
+            val view = layoutInflater.inflate(R.layout.photo_gridlayout, parent, false)
             return ClothingItemHolder(view)
         }
 
@@ -208,6 +171,11 @@ class ClosetListFragment: Fragment() {
         }
     }
 
+
+    private fun updateUI(clothingItems: List<ClothingItem>) {
+        adapter = ClothingItemAdapter(clothingItems)
+        closetRecyclerView.adapter = adapter
+    }
 
     companion object {
         fun newInstance(): ClosetListFragment {
