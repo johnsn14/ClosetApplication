@@ -15,6 +15,7 @@
     <string name="description">Description</string>>
     <string name="description_size_pattern_etc">Description size pattern etc</string>
     <string name="enter_clothing_color">Enter Clothing Color</string>
+    <string name="new_clothing_item">New Clothing Item</string>
 
     <!--All of the items for our Spinners/dropdown menus-->
     <string-array name="clothing_type_array">
