@@ -14,7 +14,7 @@ import java.util.*
 class ClosetTypeConverter {
     // Will tell @Room how to convert the type to store in the database
     @TypeConverter
-    fun toUUID(uuid: String?): UUID {
+    fun toUUID(uuid: String?): UUID? {
         return UUID.fromString(uuid)
     }
     // Will tell @Room how to convert from the database back into the UUID format to use in Android/Kotlin.

@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import java.util.*
 
@@ -54,10 +52,12 @@ class EditClothingPageFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         clothingItemDetailViewModel.clothingItemLiveData.observe(
-            viewLifecycleOwner, Observer {
-                clothingItems ->
-                clothingItems?.let {
-                    updateUI()
+            viewLifecycleOwner,
+            Observer { clothingItems -> clothingItems?.let {
+                    if (clothingItems != null) {
+                        this.clothingItem = clothingItems
+                        updateUI()
+                    }
                 }
             }
         )

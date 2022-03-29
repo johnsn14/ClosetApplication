@@ -65,7 +65,7 @@ class ClosetListFragment: Fragment() {
         val view = inflater.inflate(R.layout.closet_list_recycler_view, container, false)
         closetRecyclerView = view.findViewById(R.id.closet_list_recycler_view_id) as RecyclerView
         closetRecyclerView.adapter = adapter
-        closetRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        closetRecyclerView.layoutManager = LinearLayoutManager(context)
 
         return view
         /*var ButtonClicked = false
@@ -158,15 +158,20 @@ class ClosetListFragment: Fragment() {
         }
     }
 
+    private fun updateUI(clothingItems: List<ClothingItem>) {
+        adapter = ClothingItemAdapter(clothingItems)
+        closetRecyclerView.adapter = adapter
+    }
+
     private inner class ClothingItemHolder(view: View) :
         RecyclerView.ViewHolder(view), View.OnClickListener {
         //Add images from camera. Store them in this container. Currently grabbing static data ClothingTitle header.
         private lateinit var clothingItem: ClothingItem
 
         // Clothing Items data to edit, and display.
-        private val clothingTypeTextView: TextView = itemView.findViewById(R.id.clothing_type)
-        private val clothingColorTextView: TextView = itemView.findViewById(R.id.clothing_color)
-        private val clothingDescriptionTextView: TextView = itemView.findViewById(R.id.clothing_description)
+        private val clothingTypeTextView: TextView = itemView.findViewById(R.id.edit_clothing_type)
+        private val clothingColorTextView: TextView = itemView.findViewById(R.id.edit_clothing_color)
+        private val clothingDescriptionTextView: TextView = itemView.findViewById(R.id.edit_clothing_description)
 
         init {
             itemView.setOnClickListener(this)
@@ -189,10 +194,9 @@ class ClosetListFragment: Fragment() {
      */
     private inner class ClothingItemAdapter(var clothingItems: List<ClothingItem>)
         : RecyclerView.Adapter<ClothingItemHolder>() {
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : ClothingItemHolder {
-            val view = layoutInflater.inflate(R.layout.edit_clothing_details_page, parent, false)
+            val view = layoutInflater.inflate(R.layout.closet_list_item, parent, false)
             return ClothingItemHolder(view)
         }
 
@@ -204,11 +208,6 @@ class ClosetListFragment: Fragment() {
         }
     }
 
-
-    private fun updateUI(clothingItems: List<ClothingItem>) {
-        adapter = ClothingItemAdapter(clothingItems)
-        closetRecyclerView.adapter = adapter
-    }
 
     companion object {
         fun newInstance(): ClosetListFragment {
