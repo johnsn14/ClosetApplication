@@ -3,9 +3,7 @@ package com.example.closet
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -46,11 +44,16 @@ class ClosetListFragment: Fragment() {
     }
 
     /**
-     * Override onAttch() to set the callbacks property.
+     * Override onAttach() to set the callbacks property.
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -62,11 +65,10 @@ class ClosetListFragment: Fragment() {
         val view = inflater.inflate(R.layout.closet_list_recycler_view, container, false)
         closetRecyclerView = view.findViewById(R.id.closet_list_recycler_view_id) as RecyclerView
         closetRecyclerView.adapter = adapter
-        closetRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        closetRecyclerView.layoutManager = LinearLayoutManager(context)
 
-
-
-        var ButtonClicked = false
+        return view
+        /*var ButtonClicked = false
 
         val fab = view.findViewById<FloatingActionButton>(R.id.add_fab)
         val fab1 = view.findViewById<FloatingActionButton>(R.id.upload_action_button)
@@ -83,11 +85,12 @@ class ClosetListFragment: Fragment() {
 
         fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
 
-        fun setClickListeners() {
+        /*fun setClickListeners() {
            view.findViewById<FloatingActionButton>(R.id.upload_action_button).setOnClickListener {
-                selectImageFromGallery()
+
             }
         }
+        */
 
         fab.setOnClickListener {
 
@@ -106,14 +109,16 @@ class ClosetListFragment: Fragment() {
         }
         fab1.setOnClickListener{
            //for upload button clicked it brimgs us too the galley option
-             setClickListeners()
+            selectImageFromGallery()
            Toast.makeText(activity, " upload Button clicked", Toast.LENGTH_SHORT).show()
         }
         fab2.setOnClickListener {
            Toast.makeText(activity, " capture Button clicked", Toast.LENGTH_SHORT).show()
         }
+        */
+         */
 
-        return view
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -131,10 +136,31 @@ class ClosetListFragment: Fragment() {
     /**
      * Override onDetach to unset the callbacks property.
      */
-
     override fun onDetach() {
         super.onDetach()
         callbacks = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_new_closet_item_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.new_clothing_item -> {
+                val clothingItem = ClothingItem()
+                closetListViewModel.addClothingItem(clothingItem)
+                callbacks?.onClothingItemSelected(clothingItem.id)
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun updateUI(clothingItems: List<ClothingItem>) {
+        adapter = ClothingItemAdapter(clothingItems)
+        closetRecyclerView.adapter = adapter
     }
 
     private inner class ClothingItemHolder(view: View) :
@@ -143,9 +169,9 @@ class ClosetListFragment: Fragment() {
         private lateinit var clothingItem: ClothingItem
 
         // Clothing Items data to edit, and display.
-        private val clothingTypeTextView: TextView = itemView.findViewById(R.id.clothing_type)
-        private val clothingColorTextView: TextView = itemView.findViewById(R.id.clothing_color)
-        private val clothingDescriptionTextView: TextView = itemView.findViewById(R.id.clothing_description)
+        private val clothingTypeTextView: TextView = itemView.findViewById(R.id.edit_clothing_type)
+        private val clothingColorTextView: TextView = itemView.findViewById(R.id.edit_clothing_color)
+        private val clothingDescriptionTextView: TextView = itemView.findViewById(R.id.edit_clothing_description)
 
         init {
             itemView.setOnClickListener(this)
@@ -168,10 +194,9 @@ class ClosetListFragment: Fragment() {
      */
     private inner class ClothingItemAdapter(var clothingItems: List<ClothingItem>)
         : RecyclerView.Adapter<ClothingItemHolder>() {
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : ClothingItemHolder {
-            val view = layoutInflater.inflate(R.layout.photo_gridlayout, parent, false)
+            val view = layoutInflater.inflate(R.layout.closet_list_item, parent, false)
             return ClothingItemHolder(view)
         }
 
@@ -183,11 +208,6 @@ class ClosetListFragment: Fragment() {
         }
     }
 
-
-    private fun updateUI(clothingItems: List<ClothingItem>) {
-        adapter = ClothingItemAdapter(clothingItems)
-        closetRecyclerView.adapter = adapter
-    }
 
     companion object {
         fun newInstance(): ClosetListFragment {

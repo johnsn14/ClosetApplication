@@ -13,7 +13,6 @@ import com.example.closet.ClosetRepository
  * from the Repository, the object will be valid while the application is running in memory.
  */
 class ClosetApplication : Application(){
-
     override fun onCreate() {
         super.onCreate()
         ClosetRepository.initialize(this)
