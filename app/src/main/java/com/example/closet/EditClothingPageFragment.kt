@@ -1,16 +1,29 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.closet
 
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.io.File
 import java.util.*
 
 private const val ARG_CLOTHING_ITEM_ID = "clothing_item_id"
@@ -18,9 +31,13 @@ private const val ARG_CLOTHING_ITEM_ID = "clothing_item_id"
 class EditClothingPageFragment: Fragment() {
 
     private lateinit var clothingItem: ClothingItem
+    private lateinit var photoFile: File
+
     private lateinit var clothingTypeField: EditText
     private lateinit var colorField: EditText
     private lateinit var clothingDescriptionField: EditText
+    private lateinit var photoView: ImageView
+    private lateinit var imageGallery: ImageButton
     private val clothingItemDetailViewModel: ClothingItemDetailViewModel by lazy {
         ViewModelProvider(this).get(ClothingItemDetailViewModel::class.java)
     }
@@ -45,6 +62,19 @@ class EditClothingPageFragment: Fragment() {
         clothingTypeField = view.findViewById(R.id.edit_clothing_type) as EditText
         colorField = view.findViewById(R.id.edit_clothing_color) as EditText
         clothingDescriptionField = view.findViewById(R.id.edit_clothing_description) as EditText
+        photoView = view.findViewById(R.id.clothing_item_photo) as ImageView
+
+        imageGallery = view.findViewById(R.id.image_gallery_button) as ImageButton
+
+        val previewImage by lazy {view.findViewById<ImageView>(R.id.clothing_item_photo) }
+
+        val selectImageFromGalleryResult = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let { previewImage.setImageURI(uri) }
+        }
+        fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
+        imageGallery.setOnClickListener {
+            selectImageFromGallery()
+        }
 
         return view
     }
@@ -56,6 +86,8 @@ class EditClothingPageFragment: Fragment() {
             Observer { clothingItems -> clothingItems?.let {
                     if (clothingItems != null) {
                         this.clothingItem = clothingItems
+                        photoFile = clothingItemDetailViewModel.getPhotoFile(clothingItem)
+
                         updateUI()
                     }
                 }
@@ -116,10 +148,15 @@ class EditClothingPageFragment: Fragment() {
                 }
             }
 
+
+
+
+
             clothingTypeField.addTextChangedListener(clothingTypeWatcher)
             colorField.addTextChangedListener(clothingColorWatcher)
             clothingDescriptionField.addTextChangedListener(clothingDescriptionWatcher)
 
+            //return view?
     }
 
     override fun onStop() {
@@ -131,7 +168,13 @@ class EditClothingPageFragment: Fragment() {
         clothingTypeField.setText(clothingItem.clothingType)
         colorField.setText(clothingItem.color)
         clothingDescriptionField.setText(clothingItem.description)
+
+
     }
+
+
+
+
 
     companion object {
         fun newInstance(clothingItemId: UUID): EditClothingPageFragment {
