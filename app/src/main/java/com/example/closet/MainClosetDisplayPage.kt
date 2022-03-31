@@ -1,16 +1,21 @@
 package com.example.closet
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
+
+
 
 
 class MainClosetDisplayPage : AppCompatActivity(),
@@ -20,7 +25,6 @@ class MainClosetDisplayPage : AppCompatActivity(),
             super.onCreate(savedInstanceState)
             //
             setContentView(R.layout.activity_main)
-
             //This grabs the id for Constraint Layout of edit_clothing_details_page.xml
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
@@ -31,7 +35,6 @@ class MainClosetDisplayPage : AppCompatActivity(),
                     .add(R.id.fragment_container, fragment)
                     .commit()
             }
-
         }
         override fun onClothingItemSelected(clothingItemId: UUID) {
             val fragment = EditClothingPageFragment.newInstance(clothingItemId)

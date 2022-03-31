@@ -1,7 +1,10 @@
 package com.example.closet
 
+import android.media.Image
+import android.widget.ImageView
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.net.URI
 import java.util.*
 
 /**
