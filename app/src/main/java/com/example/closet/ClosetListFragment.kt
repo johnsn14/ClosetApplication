@@ -3,9 +3,7 @@ package com.example.closet
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -52,7 +50,26 @@ class ClosetListFragment: Fragment() {
         super.onAttach(context)
         callbacks = context as Callbacks?
     }
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_new_closet_item_menu, menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.new_clothing_item -> {
+                val clothingItem = ClothingItem()
+                closetListViewModel.addClothingItem(clothingItem)
+                callbacks?.onClothingItemSelected(clothingItem.id)
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,25 +79,25 @@ class ClosetListFragment: Fragment() {
         val view = inflater.inflate(R.layout.closet_list_recycler_view, container, false)
         closetRecyclerView = view.findViewById(R.id.closet_list_recycler_view_id) as RecyclerView
         closetRecyclerView.adapter = adapter
-        closetRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        closetRecyclerView.layoutManager = GridLayoutManager(context,2)
 
-
-        val fab: FloatingActionButton = view.findViewById(R.id.add_fab)
+        return view }
+        /* val fab: FloatingActionButton = view.findViewById(R.id.add_fab)
         val fab1: FloatingActionButton = view.findViewById(R.id.upload_action_button)
         val fab2: FloatingActionButton = view.findViewById(R.id.capture_action_button)
         val rotateOpenAnimation: Animation by lazy { AnimationUtils.loadAnimation(activity, R.anim.rotate_open_animation)}
         val rotateCloseAnimation: Animation by lazy { AnimationUtils.loadAnimation(activity, R.anim.rotate_close_animation)}
-        var ButtonClicked = false
+        var ButtonClicked = false */
 
-        val previewImage by lazy { view.findViewById<ImageView>(R.id.grid_image_view) }
+      /* val previewImage by lazy { view.findViewById<ImageView>(R.id.grid_image_view) }
         val selectImageFromGalleryResult =
             registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
                uri?.let { previewImage.setImageURI(uri) }
-           }
+           } */
 
-        fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
+      /*  fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
 
-        fab.setOnClickListener {
+      fab.setOnClickListener {
             if (!ButtonClicked){
                 fab.startAnimation(rotateOpenAnimation)
                 fab1.visibility = View.VISIBLE
@@ -92,7 +109,7 @@ class ClosetListFragment: Fragment() {
                 fab1.visibility = View.INVISIBLE
                 fab2.visibility = View.INVISIBLE
                 ButtonClicked = false
-            }
+            }*/
         }
         fab1.setOnClickListener{
             selectImageFromGallery()
@@ -100,9 +117,9 @@ class ClosetListFragment: Fragment() {
         }
         fab2.setOnClickListener {
             Toast.makeText(activity, " capture Button clicked", Toast.LENGTH_SHORT).show()
-        }
-        return view
-    }
+        }*/
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

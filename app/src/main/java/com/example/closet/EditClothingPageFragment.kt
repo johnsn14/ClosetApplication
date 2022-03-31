@@ -86,7 +86,7 @@ class EditClothingPageFragment: Fragment() {
             Observer { clothingItems -> clothingItems?.let {
                     if (clothingItems != null) {
                         this.clothingItem = clothingItems
-                        photoFile = clothingItemDetailViewModel.getPhotoFile(clothingItem)
+                        //photoFile = clothingItemDetailViewModel.getPhotoFile(clothingItem)
 
                         updateUI()
                     }
